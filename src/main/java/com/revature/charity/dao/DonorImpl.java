@@ -69,4 +69,31 @@ public class DonorImpl implements DonorDAO{
 		}
 		return isLoggedIn;
 	}
+	/** Check email is exist **/
+	public Donor isEmailExist(String email) throws DBException
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Donor donorObj = null;
+		try {
+			conn = ConnectionUtil.getConnection();
+			String sqlStmt = "SELECT name,email FROM donor WHERE email = ?";
+			pstmt = conn.prepareStatement(sqlStmt);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+			{
+				donorObj = new Donor();
+				donorObj.setName(rs.getString("name"));
+				donorObj.setEmail(rs.getString("email"));
+			}
+		} catch(SQLException e)
+		{
+			throw new DBException("Unable to login",e);
+		} finally {
+			ConnectionUtil.close(conn, pstmt, null);
+		}
+		return donorObj;
+	}
 }
