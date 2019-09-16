@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class Transaction {
 	private Integer id;
+	private Integer fundRequestId;
 	private Integer donorId;
-	private Integer admin_id;
 	private Double amount;
 	private LocalDate date;
 	@Override
 	public String toString() {
-		return "Transaction [id=" + id + ", donorId=" + donorId + ", admin_id=" + admin_id + ", amount=" + amount
+		return "Transaction [id=" + id + ", donorId=" + fundRequestId + ", admin_id=" + donorId + ", amount=" + amount
 				+ ", date=" + date + "]";
 	}
 	public Integer getId() {
@@ -19,17 +19,17 @@ public class Transaction {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	public Integer getfundRequestId() {
+		return fundRequestId;
+	}
+	public void setfundRequestId(Integer fundRequestId) {
+		this.fundRequestId = fundRequestId;
+	}
 	public Integer getDonorId() {
 		return donorId;
 	}
-	public void setDonorId(Integer donorId) {
-		this.donorId = donorId;
-	}
-	public Integer getAdmin_id() {
-		return admin_id;
-	}
-	public void setAdmin_id(Integer admin_id) {
-		this.admin_id = admin_id;
+	public void setDonorId(Integer admin_id) {
+		this.donorId = admin_id;
 	}
 	public Double getAmount() {
 		return amount;
