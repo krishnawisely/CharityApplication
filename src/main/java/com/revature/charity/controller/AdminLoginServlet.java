@@ -19,12 +19,12 @@ import com.revature.charity.service.AdminServiceImpl;
 public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AdminService service = new AdminServiceImpl();
 		Admin admin = new Admin();
 		Admin adminObj = new Admin();
-		String email = "admin@gmail.com";
-		String password = "mypass";
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
 		admin.setEmail(email);
 		admin.setPassword(password);
 		adminObj = service.adminLoginService(admin);

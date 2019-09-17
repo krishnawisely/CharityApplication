@@ -19,7 +19,7 @@ public class AdminImpl implements AdminDAO {
 		Admin adminObj = null;
 		try {
 			conn = ConnectionUtil.getConnection();
-			String sqlStmt = "SELECT name,email FROM admin WHERE email = ? AND password = ?";
+			String sqlStmt = "SELECT id,name,email FROM admin WHERE email = ? AND password = ?";
 			pstmt = conn.prepareStatement(sqlStmt);
 			pstmt.setString(1, admin.getEmail());
 			pstmt.setString(2, admin.getPassword());
@@ -27,6 +27,7 @@ public class AdminImpl implements AdminDAO {
 			if(rs.next())
 			{
 				adminObj = new Admin();
+				adminObj.setId(rs.getInt("id"));
 				adminObj.setName(rs.getString("name"));
 				adminObj.setEmail(rs.getString("email"));
 			}

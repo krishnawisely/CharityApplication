@@ -22,7 +22,7 @@ public class ListFundRequestServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		FundRequestService service = new FundRequestServiceImpl();
-		String requestType = "EDUCATION";
+		String requestType = request.getParameter("requestType");
 		List<FundRequest> list = service.listFundRequest(requestType);
 		Gson gson = new Gson();
 		String json = gson.toJson(list);

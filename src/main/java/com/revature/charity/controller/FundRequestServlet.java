@@ -24,12 +24,22 @@ public class FundRequestServlet extends HttpServlet {
 		Boolean isStatus = false;
 		FundRequestService service = new FundRequestServiceImpl();
 		FundRequest fundRequest = new FundRequest();
-		fundRequest.setAdminId(1);
-		fundRequest.setRequestType("OTHERS");
-		fundRequest.setDescription("others fund");
-		fundRequest.setAmount(100000D);
-		LocalDate expireDate = LocalDate.parse("2019-09-27");
-		fundRequest.setExpireDate(expireDate);
+		
+		String adminId = request.getParameter("id");
+		Integer id = Integer.parseInt(adminId);
+		
+		String requestType = request.getParameter("requestType");
+		String description = request.getParameter("description");
+		String targetAmount = request.getParameter("amount");
+		Double amount = Double.parseDouble(targetAmount);
+		String expireDate = request.getParameter("date");
+		LocalDate date = LocalDate.parse(expireDate);
+		
+		fundRequest.setAdminId(id);
+		fundRequest.setRequestType(requestType);
+		fundRequest.setDescription(description);
+		fundRequest.setAmount(amount);
+		fundRequest.setExpireDate(date);
 		isStatus = service.fundRequestService(fundRequest);
 
 		String json = "{\"isStatus:\"" + "\"" + isStatus + "\"}";

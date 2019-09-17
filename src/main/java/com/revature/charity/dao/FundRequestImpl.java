@@ -57,12 +57,14 @@ public class FundRequestImpl implements FundRequestDAO {
 		String requestType;
 		FundRequest request = null;
 		try {
+			Integer fundRequestId = rs.getInt("id");
 			requestType = rs.getString("request_type");
 			String description = rs.getString("description");
 			Double neededAmount = rs.getDouble("needed_amount");
 			Date expireDate = rs.getDate("expire_date");
 			
 			request = new FundRequest();
+			request.setId(fundRequestId);
 			request.setRequestType(requestType);
 			request.setDescription(description);
 			request.setAmount(neededAmount);
@@ -85,11 +87,11 @@ public class FundRequestImpl implements FundRequestDAO {
 		try {
 			conn = ConnectionUtil.getConnection();
 			
-			String sqlStmt = "SELECT request_type,description,expire_date,"
+			String sqlStmt = "SELECT id,request_type,description,expire_date,"
 					+ "("
 					+ "SELECT IF((SUM(amount) <= fr.amount),(fr.amount - SUM(amount)),0) FROM transaction WHERE fund_request_id = fr.id GROUP BY fund_request_id HAVING SUM(amount) <= fr.amount"
 					+ ") AS needed_amount"
-					+ " FROM fund_request fr WHERE request_type = ? AND amount > (SELECT SUM(amount) FROM transaction WHERE fund_request_id = fr.id)";
+					+ " FROM fund_request fr WHERE request_type = ? AND amount > (SELECT IFNULL(SUM(amount),0) FROM transaction WHERE fund_request_id = fr.id)";
 			System.out.println(sqlStmt);
 			pstmt = conn.prepareStatement(sqlStmt);
 			pstmt.setString(1, requestType);

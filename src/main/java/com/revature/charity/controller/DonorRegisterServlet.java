@@ -23,11 +23,12 @@ public class DonorRegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Boolean isLoggedIn = false;
 		DonorService service = new DonorServiceImpl();
-		String name = "user";
-		String email = "useremail2@gmail.com";
-		String password = "mypass";
-		String gender = "male";
-		LocalDate dateOfBirth = LocalDate.parse("2019-09-10");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String gender = request.getParameter("gender");
+		String dob = request.getParameter("dob");
+		LocalDate dateOfBirth = LocalDate.parse(dob);
 		Donor donor = new Donor();
 		donor.setName(name);
 		donor.setEmail(email);
@@ -38,7 +39,7 @@ public class DonorRegisterServlet extends HttpServlet {
 		isLoggedIn = service.donorRegister(donor);
 		
 			PrintWriter out = response.getWriter();
-			String json = "{\"Err_msg:\""+"\""+isLoggedIn+"\"}";
+			String json = "{\"err_msg\""+":"+"\""+isLoggedIn+"\"}";
 			out.write(json);
 		
 	}

@@ -23,8 +23,8 @@ public class DonorLoginServlet extends HttpServlet {
 		DonorService service = new DonorServiceImpl();
 		Donor donor = new Donor();
 		Donor donorObj = new Donor();
-		String email = "krishna@gmail.com";
-		String password = "mypass";
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
 		donor.setEmail(email);
 		donor.setPassword(password);
 		donorObj = service.donorSignin(donor);

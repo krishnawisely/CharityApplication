@@ -22,12 +22,18 @@ public class TransactionServlet extends HttpServlet {
 		Boolean status = false;
 		TransactionService service = new TransactionServiceImpl();
 		Transaction transactionObj = new Transaction();
-		Integer donorId = 1;
-		Integer fundRequestId = 2;
-		Double amount = 5000D;
-		transactionObj.setDonorId(donorId);
-		transactionObj.setfundRequestId(fundRequestId);
-		transactionObj.setAmount(amount);
+		String donorId = request.getParameter("id");
+		Integer id = Integer.parseInt(donorId);
+		
+		String fundRequestId = request.getParameter("fundRequestId");
+		Integer fundId = Integer.parseInt(fundRequestId);
+		
+		String amount = request.getParameter("amount");
+		Double requestAmount = Double.parseDouble(amount);
+		
+		transactionObj.setDonorId(id);
+		transactionObj.setfundRequestId(fundId);
+		transactionObj.setAmount(requestAmount);
 		status = service.transaction(transactionObj);
 		
 		String json = "{\"status:\"" + "\"" + status +"\"}";
