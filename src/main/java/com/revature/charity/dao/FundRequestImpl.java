@@ -73,7 +73,7 @@ public class FundRequestImpl implements FundRequestDAO {
 		return request;
 	}
 	
-	/** Fund request **/
+	/** List fund request **/
 	public List<FundRequest> findByRquestType(String requestType) throws DBException
 	{
 		Connection conn = null;
@@ -84,9 +84,12 @@ public class FundRequestImpl implements FundRequestDAO {
 		list = new ArrayList<FundRequest>();
 		try {
 			conn = ConnectionUtil.getConnection();
+			
 			String sqlStmt = "SELECT request_type,description,expire_date,"
-			+"(amount - (SELECT SUM(amount) as Fund_Needed FROM transaction WHERE fr.id = fund_request_id)) AS needed_amount"
-			+" FROM fund_request fr WHERE request_type = ? AND active = 1";
+					+ "("
+					+ "SELECT IF((SUM(amount) <= fr.amount),(fr.amount - SUM(amount)),0) FROM transaction WHERE fund_request_id = fr.id GROUP BY fund_request_id HAVING SUM(amount) <= fr.amount"
+					+ ") AS needed_amount"
+					+ " FROM fund_request fr WHERE request_type = ? AND amount > (SELECT SUM(amount) FROM transaction WHERE fund_request_id = fr.id)";
 			System.out.println(sqlStmt);
 			pstmt = conn.prepareStatement(sqlStmt);
 			pstmt.setString(1, requestType);

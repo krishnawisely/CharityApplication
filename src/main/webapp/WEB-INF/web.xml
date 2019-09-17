@@ -4,4 +4,34 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>DonorServlet</servlet-name>
+  	<display-name>DonorServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.charity.controller.DonorServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>FundRequestServlet</servlet-name>
+  	<display-name>FundRequestServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.charity.controller.FundRequestServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>TransactionServlet</servlet-name>
+  	<display-name>TransactionServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.charity.controller.TransactionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DonorServlet</servlet-name>
+  	<url-pattern>/DonorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FundRequestServlet</servlet-name>
+  	<url-pattern>/FundRequestServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>TransactionServlet</servlet-name>
+  	<url-pattern>/TransactionServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
