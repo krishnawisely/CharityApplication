@@ -5,10 +5,10 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-  	<servlet-name>DonorServlet</servlet-name>
-  	<display-name>DonorServlet</display-name>
+  	<servlet-name>DonorLoginServlet</servlet-name>
+  	<display-name>DonorLoginServlet</display-name>
   	<description></description>
-  	<servlet-class>com.revature.charity.controller.DonorServlet</servlet-class>
+  	<servlet-class>com.revature.charity.controller.DonorLoginServlet</servlet-class>
   </servlet>
   <servlet>
   	<servlet-name>FundRequestServlet</servlet-name>
@@ -22,9 +22,27 @@
   	<description></description>
   	<servlet-class>com.revature.charity.controller.TransactionServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ListFundRequestServlet</servlet-name>
+  	<display-name>ListFundRequestServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.charity.controller.ListFundRequestServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DonorRegisterServlet</servlet-name>
+  	<display-name>DonorRegisterServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.charity.controller.DonorRegisterServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AdminLoginServlet</servlet-name>
+  	<display-name>AdminLoginServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.revature.charity.controller.AdminLoginServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
-  	<servlet-name>DonorServlet</servlet-name>
-  	<url-pattern>/DonorServlet</url-pattern>
+  	<servlet-name>DonorLoginServlet</servlet-name>
+  	<url-pattern>/DonorLoginServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>FundRequestServlet</servlet-name>
@@ -33,5 +51,17 @@
   <servlet-mapping>
   	<servlet-name>TransactionServlet</servlet-name>
   	<url-pattern>/TransactionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ListFundRequestServlet</servlet-name>
+  	<url-pattern>/ListFundRequestServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DonorRegisterServlet</servlet-name>
+  	<url-pattern>/DonorRegisterServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminLoginServlet</servlet-name>
+  	<url-pattern>/AdminLoginServlet</url-pattern>
   </servlet-mapping>
 </web-app>

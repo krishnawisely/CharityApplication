@@ -26,15 +26,16 @@ public class DonorServiceImpl implements DonorService{
 		}
 		return donorObj;
 	}
-	/** Donor register service **/
-	public Boolean donorRegister(Donor donor)
+	/** Donor register service 
+	 * @throws DBException **/
+	public Boolean donorRegister(Donor donor) 
 	{
 		Boolean isLoggedIn = false;
 		DonorDAO donorDao = new DonorImpl();
 		Logger logger = new Logger();
 		try {
 			DonorValidator.registerValidator(donor);
-			donorDao.donorRegister(donor);
+			isLoggedIn = donorDao.donorRegister(donor);
 		} catch (DBException e) {
 			logger.debug(e.getMessage());
 		} catch (ValidatorException e) {

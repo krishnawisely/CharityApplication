@@ -20,7 +20,7 @@ public class DonorImpl implements DonorDAO{
 		Donor donorObj = null;
 		try {
 			conn = ConnectionUtil.getConnection();
-			String sqlStmt = "SELECT name,email FROM donor WHERE email = ? AND password = ?";
+			String sqlStmt = "SELECT id,name,email FROM donor WHERE email = ? AND password = ?";
 			pstmt = conn.prepareStatement(sqlStmt);
 			pstmt.setString(1, donor.getEmail());
 			pstmt.setString(2, donor.getPassword());
@@ -28,6 +28,7 @@ public class DonorImpl implements DonorDAO{
 			if(rs.next())
 			{
 				donorObj = new Donor();
+				donorObj.setId(rs.getInt("id"));
 				donorObj.setName(rs.getString("name"));
 				donorObj.setEmail(rs.getString("email"));
 			}

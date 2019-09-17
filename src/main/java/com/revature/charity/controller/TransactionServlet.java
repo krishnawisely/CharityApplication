@@ -30,7 +30,7 @@ public class TransactionServlet extends HttpServlet {
 		transactionObj.setAmount(amount);
 		status = service.transaction(transactionObj);
 		
-		String json = "{status:" + status +"}";
+		String json = "{\"status:\"" + "\"" + status +"\"}";
 		PrintWriter out = response.getWriter();
 		out.write(json);
 	}

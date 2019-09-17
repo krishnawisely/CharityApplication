@@ -16,7 +16,7 @@ import com.revature.charity.service.DonorServiceImpl;
 /**
  * Servlet implementation class DonorServlet
  */
-public class DonorServlet extends HttpServlet {
+public class DonorLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +34,7 @@ public class DonorServlet extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		out.write(json);
+		out.flush();
 	}
 	
 }
