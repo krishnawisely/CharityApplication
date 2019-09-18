@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.charity.model.Donor;
-import com.revature.charity.service.DonorService;
-import com.revature.charity.service.DonorServiceImpl;
 
 /**
  * Servlet implementation class DonorRegisterServlet
@@ -21,8 +19,6 @@ public class DonorRegisterServlet extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Boolean isLoggedIn = false;
-		DonorService service = new DonorServiceImpl();
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -36,12 +32,9 @@ public class DonorRegisterServlet extends HttpServlet {
 		donor.setDateOfBirth(dateOfBirth);
 		donor.setGender(gender);
 		
-		isLoggedIn = service.donorRegister(donor);
-		
+		String json = DonorRegisterController.donorRegister(donor);
 			PrintWriter out = response.getWriter();
-			String json = "{\"err_msg\""+":"+"\""+isLoggedIn+"\"}";
-			out.write(json);
-		
+			out.write(json);	
 	}
 
 }

@@ -48,9 +48,18 @@
             var url="http://localhost:8080/CharityApplication/AdminLoginServlet?"+formData;
             $.post(url,function(data){
                 console.log(data);
-                //console.log(JSON.stringify(response));
-                window.location.replace('adminHome.jsp');
-                localStorage.setItem('Donor_Data',data);
+                var response = JSON.parse(data);
+                alert(response.errorMessage);
+                if(response.errorMessage != null)
+                {
+                	alert(response.errorMessage);
+                	
+                } else{
+                	 window.location.replace('adminHome.jsp');
+                     localStorage.setItem('Logged_In_Admin',data);
+                    }
+               
+                
             });
         }
     </script>

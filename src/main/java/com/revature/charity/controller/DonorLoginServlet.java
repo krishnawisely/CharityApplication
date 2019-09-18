@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 import com.revature.charity.model.Donor;
-import com.revature.charity.service.DonorService;
-import com.revature.charity.service.DonorServiceImpl;
 
 /**
  * Servlet implementation class DonorServlet
@@ -20,17 +17,13 @@ public class DonorLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DonorService service = new DonorServiceImpl();
 		Donor donor = new Donor();
-		Donor donorObj = new Donor();
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		donor.setEmail(email);
 		donor.setPassword(password);
-		donorObj = service.donorSignin(donor);
 		
-		Gson gson = new Gson();
-		String json = gson.toJson(donorObj);
+		String json = DonorLoginController.donorLogin(donor);
 		
 		PrintWriter out = response.getWriter();
 		out.write(json);

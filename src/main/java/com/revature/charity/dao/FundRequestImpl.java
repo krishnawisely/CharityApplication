@@ -87,11 +87,12 @@ public class FundRequestImpl implements FundRequestDAO {
 		try {
 			conn = ConnectionUtil.getConnection();
 			
-			String sqlStmt = "SELECT id,request_type,description,expire_date,"
-					+ "("
-					+ "SELECT IF((SUM(amount) <= fr.amount),(fr.amount - SUM(amount)),0) FROM transaction WHERE fund_request_id = fr.id GROUP BY fund_request_id HAVING SUM(amount) <= fr.amount"
-					+ ") AS needed_amount"
-					+ " FROM fund_request fr WHERE request_type = ? AND amount > (SELECT IFNULL(SUM(amount),0) FROM transaction WHERE fund_request_id = fr.id)";
+//			String sqlStmt = "SELECT id,request_type,description,expire_date,"
+//					+ "("
+//					+ "SELECT IF((SUM(amount) <= fr.amount),(fr.amount - SUM(amount)),0) FROM transaction WHERE fund_request_id = fr.id GROUP BY fund_request_id HAVING SUM(amount) <= fr.amount"
+//					+ ") AS needed_amount"
+//					+ " FROM fund_request fr WHERE request_type = ? AND amount > (SELECT IFNULL(SUM(amount),0) FROM transaction WHERE fund_request_id = fr.id)";
+			String sqlStmt = "SELECT id,request_type,description,expire_date,(amount - (SELECT IFNULL(SUM(amount),0)FROM transaction WHERE fund_request_id = fr.id)) AS needed_amount FROM fund_request fr WHERE request_type = ? AND amount > (SELECT IFNULL(SUM(amount),0) FROM transaction WHERE fund_request_id = fr.id)";
 			System.out.println(sqlStmt);
 			pstmt = conn.prepareStatement(sqlStmt);
 			pstmt.setString(1, requestType);

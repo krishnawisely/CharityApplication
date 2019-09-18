@@ -3,44 +3,52 @@ package com.revature.charity.service;
 import com.revature.charity.dao.DonorDAO;
 import com.revature.charity.dao.DonorImpl;
 import com.revature.charity.exception.DBException;
-import com.revature.charity.logger.Logger;
+import com.revature.charity.exception.ServiceException;
 import com.revature.charity.model.Donor;
 import com.revature.charity.validator.DonorValidator;
 
 import sun.security.validator.ValidatorException;
 
 public class DonorServiceImpl implements DonorService{
-	/** Donor login service **/
-	public Donor donorSignin(Donor donor)
+	/** Donor login service 
+	 * @throws ServiceException **/
+	public Donor donorSignin(Donor donor) throws ServiceException
 	{
 		DonorDAO donorDao = new DonorImpl();
 		Donor donorObj = null;
-		Logger logger = new Logger();
 		try {
 			DonorValidator.loginValidator(donor);
 			donorObj = donorDao.donorLogin(donor);
+			if(donorObj == null)
+			{
+				throw new ServiceException("Invalid username and password");
+			}
 		} catch (DBException e) {
-			logger.debug(e.getMessage());
+			throw new ServiceException(e.getMessage());
 		} catch (ValidatorException e) {
-			logger.debug(e.getMessage());
+			throw new ServiceException(e.getMessage());
 		}
 		return donorObj;
 	}
 	/** Donor register service 
+	 * @throws ServiceException 
 	 * @throws DBException **/
-	public Boolean donorRegister(Donor donor) 
+	public Boolean donorRegister(Donor donor) throws ServiceException
 	{
-		Boolean isLoggedIn = false;
+		Boolean result = false;
 		DonorDAO donorDao = new DonorImpl();
-		Logger logger = new Logger();
 		try {
 			DonorValidator.registerValidator(donor);
-			isLoggedIn = donorDao.donorRegister(donor);
+			result = donorDao.donorRegister(donor);
+			if(!result)
+			{
+				throw new ServiceException("Invalid register");
+			}
 		} catch (DBException e) {
-			logger.debug(e.getMessage());
+			throw new ServiceException(e.getMessage());
 		} catch (ValidatorException e) {
-			logger.debug(e.getMessage());
+			throw new ServiceException(e.getMessage());
 		}
-		return isLoggedIn;
+		return result;
 	}
 }

@@ -96,9 +96,19 @@
         }
         var formData = "name="+userName+"&email="+email+"&password="+password+"&dob="+dateOfBirth+"&gender="+gender;
         var url = "http://localhost:8080/CharityApplication/DonorRegisterServlet?"+formData;
-        $.get(url,function(response){
-           console.log('register success!'); 
-           window.location.replace('donorLogin.jsp');
+        $.get(url,function(data){
+
+            var response = JSON.parse(data);
+
+            if(response.errorMessage != null)
+            {
+            	alert(response.errorMessage);
+            } else{
+            	  console.log('register success!'); 
+                  window.location.replace('donorLogin.jsp');
+               }
+            
+         
         });
     }
 </script>

@@ -45,7 +45,7 @@ public class DonorImpl implements DonorDAO{
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		Boolean isLoggedIn = false;
+		Boolean result = false;
 		try {
 			conn = ConnectionUtil.getConnection();
 			String sqlStmt = "INSERT INTO donor(name,email,password,date_of_birth,gender) VALUES(?,?,?,?,?)";
@@ -59,16 +59,17 @@ public class DonorImpl implements DonorDAO{
 			pstmt.setDate(4, dateOfBirth);
 			pstmt.setString(5, donor.getGender());
 			/** Check user login **/
-			if(pstmt.executeUpdate() == 1)
+			int rows = pstmt.executeUpdate();
+			if(rows == 1)
 			{
-				isLoggedIn = true;
+				result = true;
 			}
 		} catch(SQLException e) {
 			throw new DBException("Unable to register",e);
 		} finally {
 			ConnectionUtil.close(conn, pstmt, null);
 		}
-		return isLoggedIn;
+		return result;
 	}
 	/** Check email is exist **/
 	public Donor isEmailExist(String email) throws DBException
