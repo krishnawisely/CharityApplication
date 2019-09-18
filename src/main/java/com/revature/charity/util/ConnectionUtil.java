@@ -9,11 +9,13 @@ import java.sql.SQLException;
 import com.revature.charity.logger.Logger;
 
 public class ConnectionUtil {
-	
+	static Logger logger = new Logger();
 	/** Get connection **/
 		public static Connection getConnection()
 		{
-			Logger logger = new Logger();
+			
+			
+			
 			final String driverClass = "com.mysql.cj.jdbc.Driver";
 			final String url = "jdbc:mysql://localhost:3306/charity_app";
 			final String userName = "root";
@@ -36,7 +38,6 @@ public class ConnectionUtil {
 		
 		public static void close(Connection conn,PreparedStatement pstmt,ResultSet rs)
 		{
-			Logger logger = new Logger();
 			try {
 				if(conn != null)
 					conn.close();

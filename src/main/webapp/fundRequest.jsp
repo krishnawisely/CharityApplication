@@ -18,9 +18,9 @@
 </head>
 <body>
     <jsp:include page="adminHeader.jsp"></jsp:include>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h5>Fund request</h5>
+        <div class="row justify-content-center align-items-center" style="height: 80vh;margin:0;">
+            <div class="col-md-4 text-center" style="box-shadow: 5px 8px 18px -8px rgba(0,0,0,0.5);border-radius:10px">
+                <h5 class="bg-warning text-light" style="padding:10px 0;margin-top:-20px;border-radius: 5px;box-shadow: 5px 8px 18px -8px rgba(0,0,0,0.5)">Fund Request</h5>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">

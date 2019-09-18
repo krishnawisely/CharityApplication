@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+
+.img{
+	background-image: url("wood.jpg");
+	width: 100vh;
+	height: 80vh;
+	transform: skewY(-0.3deg);
+	background-repeat: no-repeat;
+}
+.b{
+	color:red;
+}

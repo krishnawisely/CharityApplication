@@ -11,6 +11,14 @@
    <jsp:include page="header.jsp"></jsp:include>
     <div class="row justify-content-center align-items-center" style="height: 80vh;margin:0;">
         <div class="col-md-6 col-lg-3 text-center" style="box-shadow: 5px 8px 18px -8px rgba(0,0,0,0.5);border-radius:10px">
+           
+           <div class="alert alert-warning alert-dismissible fade show" id="loginStatus" style="display:none;" role="alert">
+		  		<strong id="err"></strong>
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+			</div>
+           
             <h5 class="text-secondary" style="padding: 10px 0">Donor Login</h5>
             <div class="form-group">
                 <div class="input-group">
@@ -50,10 +58,12 @@
             $.get(url,function(data){
 
                	var response = JSON.parse(data);
-               	console.log(data);
+                $('#err').html(response.errorMessage);
+                $('#loginStatus').css({"display":"block"});
                 if(response.errorMessage != null)
                     {
-                		alert(response.errorMessage);
+                	 $('#err').html(response.errorMessage);
+                     $('#loginStatus').css({"display":"block"});
                     } else{
 							
 							console.log('donor login success!');
